@@ -1,0 +1,26 @@
+{
+  "layout": {
+    "title": "Atlasboard Sonarcloud Overall Status Perspective",
+    "titleVisible": true,
+    "description": "Displays Project Overall Static Analyzed Metrics",
+    "customJS": [],
+    "widgets": [{
+      "enabled": true,
+      "row": 1,
+      "col": 1,
+      "width": 3,
+      "height": 3,
+      "widget": "sonarcloud",
+      "job": "sonarcloud",
+      "config": "sonarcloud-card"
+    }
+    ]
+  },
+  "config": {
+    "sonarcloud-card": {
+      "interval": 60000,
+      "serverUrl": "server-url",
+      "resource": "project-key"
+    }
+  }
+}  

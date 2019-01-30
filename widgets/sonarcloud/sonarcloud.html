@@ -1,0 +1,222 @@
+<div class="content"></div>
+<script type="text/html" class="template">
+        <div  id="<%=projectName%>">
+        <div class="card">
+        <div class="container">
+            <div class="boxed-group-header">
+                <div class="project-card-header">
+                    <h2 class="project-card-name">
+                        <a href="<%=dashboardUrl%>"><%=projectName%></a>
+                    </h2>
+                    <div class="project-card-quality-gate big-spacer-left">
+                        <div class="project-card-measure-inner">
+                            <% if (qualityGates.projectStatus.status == 'OK') { %>
+                            <span class="level level-OK level-small">Passed</span>
+                            <%}else if(qualityGates.projectStatus.status == 'WARN') { %>
+                            <span id="<%=projectName%>-myBtn" class="popup level level-WARN level-small">Warning</span>
+                            <%}else if(qualityGates.projectStatus.status == 'ERROR') { %>
+                            <span id="<%=projectName%>-myBtn" class="popup level level-ERROR level-small">Failed</span>
+                            <%}else{ %>
+                            <span class="level level-UNKNOWN level-small">Unknown</span>
+                            <%} %>
+
+                        </div>
+
+                    </div>
+                    <div>
+                        <span class="project-card-dates note text-right big-spacer-left">Last analysis:  <%=lastAnalysisDate%></span>
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="boxed-group-inner">
+                <div class="project-card-measures">
+                    <div class="project-card-measure">
+                        <div class="project-card-measure-inner">
+                            <% if( metricBug == null ||  ratingBug == null || countBug == null){ %>
+                            <span class="level level-UNKNOWN level-small">Unknown</span>
+                            <% }else{ %>
+                            <div class="project-card-measure-number"><span
+                                    class="spacer-right"><%=countBug%></span><span
+                                    class="rating rating-<%=ratingBug%>"><%=ratingBug%></span></div>
+                            <% } %>
+                            <div class="project-card-measure-label-with-icon">
+                                <svg class="little-spacer-right vertical-bottom" height="16" version="1.1" viewBox="0 0 16 16" width="16" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 1.41421;"><path d="M11 9h1.3l.5.8.8-.5-.8-1.3H11v-.3l2-2.3V3h-1v2l-1 1.2V5c-.1-.8-.7-1.5-1.4-1.9L11 1.8l-.7-.7-1.8 1.6-1.8-1.6-.7.7 1.5 1.3C6.7 3.5 6.1 4.2 6 5v1.1L5 5V3H4v2.3l2 2.3V8H4.2l-.7 1.2.8.5.4-.7H6v.3l-2 1.9V14h1v-2.4l1-1C6 12 7.1 13 8.4 13h.8c.7 0 1.4-.3 1.8-.9.3-.4.3-.9.2-1.4l.9.9V14h1v-2.8l-2-1.9V9zm-2 2H8V6h1v5z" style="fill: currentcolor;"></path></svg>
+                                Bugs
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-measure">
+                        <div class="project-card-measure-inner">
+                            <% if( metricVulnerability == null  ||  ratingVulnerability == null || countVulnerability == null){ %>
+                            <span class="level level-UNKNOWN level-small">Unknown</span>
+                            <% }else{ %>
+                            <div class="project-card-measure-number"><span class="spacer-right"><%=countVulnerability%></span><span
+                                    class="rating rating-<%=ratingVulnerability%>"><%=ratingVulnerability%></span></div>
+                            <% } %>
+                            <div class="project-card-measure-label-with-icon">
+                                <svg class="little-spacer-right vertical-bottom" height="16" version="1.1" viewBox="0 0 16 16" width="16" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 1.41421;"><path d="M10.8 5H6V3.9a2.28 2.28 0 0 1 2-2.5 2.22 2.22 0 0 1 1.8 1.2.48.48 0 0 0 .7.2.48.48 0 0 0 .2-.7A3 3 0 0 0 8 .4a3.34 3.34 0 0 0-3 3.5v1.2a2.16 2.16 0 0 0-2 2.1v4.4a2.22 2.22 0 0 0 2.2 2.2h5.6a2.22 2.22 0 0 0 2.2-2.2V7.2A2.22 2.22 0 0 0 10.8 5zm-2.2 5.5v1.2H7.4v-1.2a1.66 1.66 0 0 1-1.1-1.6A1.75 1.75 0 0 1 8 7.2a1.71 1.71 0 0 1 .6 3.3z" style="fill: currentcolor;"></path></svg>
+                                Vulnerabilities
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="project-card-measure">
+                        <div class="project-card-measure-inner">
+                            <% if( metricCodeSmell == null || ratingCodeSmell == null || countCodeSmell == null){ %>
+                            <span class="level level-UNKNOWN level-small">Unknown</span>
+                            <% }else{ %>
+                            <div class="project-card-measure-number"><span class="spacer-right"><%=metricCodeSmell.value%></span><span
+                                    class="rating rating-<%=ratingCodeSmell == '?' ? 'unknown' : ratingCodeSmell %>"><%=ratingCodeSmell%></span></div>
+                            <% } %>
+                            <div class="project-card-measure-label-with-icon">
+                                <svg class="little-spacer-right vertical-bottom" height="16" version="1.1" viewBox="0 0 16 16" width="16" xml:space="preserve" xmlns:xlink="http://www.w3.org/1999/xlink" style="fill-rule: evenodd; clip-rule: evenodd; stroke-linejoin: round; stroke-miterlimit: 1.41421;"><path d="M8 2C4.7 2 2 4.7 2 8s2.7 6 6 6 6-2.7 6-6-2.7-6-6-6zm-.5 5.5h.9v.9h-.9v-.9zm-3.8.2c-.1 0-.2-.1-.2-.2 0-.4.1-1.2.6-2S5.3 4.2 5.6 4c.2 0 .3 0 .3.1l1.3 2.3c0 .1 0 .2-.1.2-.1.2-.2.3-.3.5-.1.2-.2.4-.2.5 0 .1-.1.2-.2.2l-2.7-.1zM9.9 12c-.3.2-1.1.5-2 .5-.9 0-1.7-.3-2-.5-.1 0-.1-.2-.1-.3l1.3-2.3c0-.1.1-.1.2-.1.2.1.3.1.5.1s.4 0 .5-.1c.1 0 .2 0 .2.1l1.3 2.3c.2.2.2.3.1.3zm2.5-4.1L9.7 8c-.1 0-.2-.1-.2-.2 0-.2-.1-.4-.2-.5 0-.1-.2-.3-.3-.4-.1 0-.1-.1-.1-.2l1.3-2.3c.1-.1.2-.1.3-.1.3.2 1 .7 1.5 1.5s.6 1.6.6 2c0 0-.1.1-.2.1z" style="fill: currentcolor;"></path></svg>
+                                Code Smells
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card-measure">
+                        <div class="project-card-measure-inner">
+                            <% if( metricCoverage == null ){ %>
+                            <span class="level level-UNKNOWN level-small">Unknown</span>
+                            <% }else{ %>
+                            <div class="project-card-measure-number"><span class="spacer-right"><svg class="donut-chart"
+                                                                                                     height="24"
+                                                                                                     width="24"><g
+                                    transform="translate(0, 0)"><g transform="translate(12, 12)"><path
+                                    d="M7.347880794884119e-16,-12A12,12,0,1,1,-10.131935106024184,6.429921539747955L-7.598951329518138,4.822441154810966A9,9,0,1,0,5.51091059616309e-16,-9Z"
+                                    style="fill: rgb(0, 170, 0);"></path><path
+                                    d="M-10.131935106024184,6.429921539747955A12,12,0,0,1,8.453776797936267e-15,-12L6.3403325984522e-15,-9A9,9,0,0,0,-7.598951329518138,4.822441154810966Z"
+                                    style="fill: rgb(212, 51, 63);"></path></g></g></svg></span><span><%=metricCoverage.value%>%</span>
+                            </div>
+                            <% } %>
+
+                            <div class="project-card-measure-label">Coverage</div>
+                        </div>
+                    </div>
+                    <div class="project-card-measure">
+                        <div class="project-card-measure-inner">
+
+
+                            <% if( metricDuplicatedLineDensity == null ){ %>
+                            <span class="level level-UNKNOWN level-small">Unknown</span>
+                            <% }else{ %>
+                            <div class="project-card-measure-number"><span class="spacer-right"><div
+                                    class="duplications-rating duplications-rating-A"></div></span><span><%=metricDuplicatedLineDensity.value%>%</span>
+                            </div>
+                            <% } %>
+                            <div class="project-card-measure-label">Duplications</div>
+                        </div>
+                    </div>
+                    <div class="project-card-measure project-card-ncloc">
+                        <div class="project-card-measure-inner pull-right">
+
+                            <% if( metricLinesOfCode == null ){ %>
+                            <span class="level level-UNKNOWN level-small">Unknown</span>
+                            <% }else{ %>
+                            <div class="project-card-measure-number">
+                                <span><%=metricLinesOfCode.value%></span><span
+                                    class="spacer-left"><div
+                                    class="size-rating ">?</div></span></div>
+
+                            <% } %>
+
+                            <% if( metricLinesOfCodeLanguageDistribution == null ){ %>
+                            <span class="level level-UNKNOWN level-small">Unknown</span>
+                            <% }else{ %>
+                            <div class="project-card-measure-label">
+                                <div class="project-card-languages">
+                                    <span><%=metricLinesOfCodeLanguageDistribution.value%></span>
+                                </div>
+                            </div>
+
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="<%=projectName%>-myModal" class="Modal is-hidden is-visuallyHidden">
+        <!-- Modal content -->
+        <div class="Modal-content">
+            Quality Gates<span id="<%=projectName%>-closeModal" class="Close">&times;</span>
+
+            <div class="overview-quality-gate-conditions-list clearfix">
+
+                <% _.each(qualityGates.projectStatus.conditions, function (condition){
+
+                if(condition.status != 'OK'){
+
+                let mapOfMetric = _.filter(mapOfMetrics, function(item) {
+                return item.metricKey.indexOf(condition.metricKey) != -1;
+                });
+
+                let conditionName = '';
+                if(mapOfMetric[0]){
+                conditionName = mapOfMetric[0].metricText;
+                }else{
+                conditionName = condition.metricKey;
+                }
+
+                let conditionDescription = '';
+
+
+                if(condition.comparator === 'GT'){
+                conditionDescription = 'is greater than ';
+                }else if(condition.comparator === 'LT'){
+                conditionDescription = 'is less than ';
+                }else{
+                conditionDescription = 'is '+condition.comparator()+' than ';
+                }
+
+
+                let ratingClass = 'rating-warn';
+                let overviewQualityGateConditionClass = 'overview-quality-gate-condition-warn';
+                if(condition.status == 'WARN'){
+                conditionDescription += condition.warningThreshold;
+                ratingClass = 'rating-warn';
+                overviewQualityGateConditionClass = 'overview-quality-gate-condition-warn';
+                }else if(condition.status == 'ERROR'){
+                conditionDescription += condition.errorThreshold;
+                ratingClass = 'rating-error';
+                overviewQualityGateConditionClass = 'overview-quality-gate-condition-error';
+                }else{
+                //do nothing.
+                }
+
+
+                %>
+
+
+                <a class="overview-quality-gate-condition <%=overviewQualityGateConditionClass%>"
+                   href="">
+                    <div class="overview-quality-gate-condition-container">
+                        <div class="overview-quality-gate-condition-value">
+                            <span><span class="rating <%=ratingClass%>"><%=condition.actualValue%></span></span>
+
+                        </div>
+                        <div>
+                            <div class="overview-quality-gate-condition-metric"><%=conditionName%></div>
+                            <div class="overview-quality-gate-threshold"><%=conditionDescription%></div>
+                        </div>
+                    </div>
+                </a>
+
+                <%
+
+                }
+
+                });%>
+            </div>
+        </div>
+    </div>
+
+</script>
